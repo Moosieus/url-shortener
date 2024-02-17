@@ -3,3 +3,36 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+.site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.site-content {
+    flex: 1;
+}
+
+#theme_toggles button .active {
+    display: none;
+}
+
+#theme_toggles button .inactive {
+    display: inline-flex;
+}
+
+#theme_toggles button:hover .active {
+    display: inline-flex;
+}
+
+#theme_toggles button:hover .inactive {
+    display: none;
+}
+
+#theme_toggles button[data-active='true'] .active {
+    display: inline-flex;
+}
+
+#theme_toggles button[data-active='true'] .inactive {
+    display: none;
+}

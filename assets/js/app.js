@@ -42,3 +42,4 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+import "./../../lib/url_shortener_web/components/theme_toggle/theme_toggle"
