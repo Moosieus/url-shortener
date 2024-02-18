@@ -17,7 +17,7 @@ defmodule UrlShortenerWeb.Router do
   scope "/", UrlShortenerWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", Live.Create, :index
   end
 
   # Other scopes may use custom stacks.

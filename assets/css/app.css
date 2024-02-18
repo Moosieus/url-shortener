@@ -2,8 +2,15 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
+/*
 .site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+*/
+
+.phx-connected {
     display: flex;
     min-height: 100vh;
     flex-direction: column;

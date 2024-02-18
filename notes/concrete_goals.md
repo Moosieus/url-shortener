@@ -8,6 +8,7 @@
 - `bigserial` IDs
 - Users as session IDs for now
 - Quality of life features (time permitting)
+- Ignore soft-deletes for now
 
 My primary goal's for this application to be "aspirationally scalable". That's to say it could be reasonably scaled up with a bit more effort invested, rather than necessitating a total rewrite.
 
@@ -39,3 +40,7 @@ Add some quality of life features, namely:
 - Vanity URLs (very nice to have)
 - Real time updates on stats page
 - Light and dark mode frontend
+
+Ignoring soft deletion of data since this is just a technical for now.
+- I'm partial to a [deleted records table](https://brandur.org/soft-deletion#deleted-records) as it ensures the database can properly ensure integrity.
+- Soft deletes are convenient for restores but annoying for data integrity.
