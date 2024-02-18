@@ -4,11 +4,13 @@ defmodule UrlShortener.Repo.Migrations.CreateLinks do
   def up do
     create table(:links) do
       add :path, :text, null: false
-      add :url, :text, null: false
+      add :url, :string, [size: 2083, null: false]
       add :creator, :text, null: false
 
       timestamps(type: :utc_datetime)
     end
+
+    create unique_index(:links, [:path], name: "links_path_uniq")
 
     create constraint(:links, :path_not_blank, check: "path != ''")
     create constraint(:links, :url_not_blank, check: "url != ''")

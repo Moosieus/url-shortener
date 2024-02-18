@@ -15,5 +15,7 @@ defmodule UrlShortener.Shortener.Link do
     link
     |> cast(attrs, [:path, :url, :creator])
     |> validate_required([:path, :url, :creator])
+    |> validate_length(:url, min: 1, max: 2083)
+    |> unique_constraint(:path)
   end
 end

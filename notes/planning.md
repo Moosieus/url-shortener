@@ -1,3 +1,6 @@
+# Disclaimer
+I'm writing these notes as I'm exploring different angles of creating this application. Not all of them are necessarily good, if at all sane. 
+
 # A URL Shortener to call my own
 
 - Phoenix, obviously.
@@ -6,6 +9,7 @@
 - Support dark mode.
 - LiveView frontend b/c it's quick and easy for prototyping.
 - Track users with cookies for now.
+- Consider security considerations
 
 Submit link -> Mint visits link ->
 ```elixir
@@ -65,3 +69,8 @@ This approach preferable to just making every session cookie a potential user on
 - Need to generate a short, unique hash for each link. Short and unique don't exactly go together.
 - Figure out a nice hash generating algorithm for this.
 - Definitely keep a unique constraint on this.
+
+## Security considerations
+- Limit input url sizes
+- ensure all shortened paths are unique
+- Only check the respone status of any sites, don't parse anything else
