@@ -3,7 +3,7 @@ defmodule UrlShortener.Repo.Migrations.CreateLinks do
 
   def up do
     create table(:links) do
-      add :path, :text, [null: false, check: "path != ''"]
+      add :path, :text, null: false
       add :url, :text, null: false
       add :creator, :text, null: false
 
