@@ -60,4 +60,62 @@ defmodule UrlShortener.ShortenerTest do
       assert %Ecto.Changeset{} = Shortener.change_link(link)
     end
   end
+
+  describe "visits" do
+    alias UrlShortener.Shortener.Visit
+
+    import UrlShortener.ShortenerFixtures
+
+    @invalid_attrs %{timestamp: nil, ip_address: nil, request_headers: nil}
+
+    test "list_visits/0 returns all visits" do
+      visit = visit_fixture()
+      assert Shortener.list_visits() == [visit]
+    end
+
+    test "get_visit!/1 returns the visit with given id" do
+      visit = visit_fixture()
+      assert Shortener.get_visit!(visit.id) == visit
+    end
+
+    test "create_visit/1 with valid data creates a visit" do
+      valid_attrs = %{timestamp: ~U[2024-02-17 06:33:00Z], ip_address: "some ip_address", request_headers: %{}}
+
+      assert {:ok, %Visit{} = visit} = Shortener.create_visit(valid_attrs)
+      assert visit.timestamp == ~U[2024-02-17 06:33:00Z]
+      assert visit.ip_address == "some ip_address"
+      assert visit.request_headers == %{}
+    end
+
+    test "create_visit/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Shortener.create_visit(@invalid_attrs)
+    end
+
+    test "update_visit/2 with valid data updates the visit" do
+      visit = visit_fixture()
+      update_attrs = %{timestamp: ~U[2024-02-18 06:33:00Z], ip_address: "some updated ip_address", request_headers: %{}}
+
+      assert {:ok, %Visit{} = visit} = Shortener.update_visit(visit, update_attrs)
+      assert visit.timestamp == ~U[2024-02-18 06:33:00Z]
+      assert visit.ip_address == "some updated ip_address"
+      assert visit.request_headers == %{}
+    end
+
+    test "update_visit/2 with invalid data returns error changeset" do
+      visit = visit_fixture()
+      assert {:error, %Ecto.Changeset{}} = Shortener.update_visit(visit, @invalid_attrs)
+      assert visit == Shortener.get_visit!(visit.id)
+    end
+
+    test "delete_visit/1 deletes the visit" do
+      visit = visit_fixture()
+      assert {:ok, %Visit{}} = Shortener.delete_visit(visit)
+      assert_raise Ecto.NoResultsError, fn -> Shortener.get_visit!(visit.id) end
+    end
+
+    test "change_visit/1 returns a visit changeset" do
+      visit = visit_fixture()
+      assert %Ecto.Changeset{} = Shortener.change_visit(visit)
+    end
+  end
 end

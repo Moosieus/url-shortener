@@ -25,3 +25,19 @@ I also prefer adding check constraints to tables where possible. They're somewha
 An argument could also be made for using explicit timezones with datetimes, but that involves lots of timezone database lookups, so the performance overhead is more significant.
 
 
+```sh
+mix phx.gen.context Shortener Visit visits link_id:references:link timestamp:utc_datetime ip_address:text request_headers:map
+# this one needed lots of work...
+```
+
+Also worth noting I specify not null wherever possible, as a matter of ensuring invalid data can't leak into the database.
+
+Foreign keys ask hard questions:
+- Link paths need a unique constraint
+- links we have on the links table are in effect "live links". If a link is deleted it shouldn't be there, full stop.
+- Visits still need to identify what they were visiting
+- Visits' foreign key to links should be nullable to reflect that links can be deleted.
+- Visits will "freeze" their link as jsonb when saving.
+- We can accurately see what visits were redirected to at the time executed.
+
+Note to self: pick up here.
