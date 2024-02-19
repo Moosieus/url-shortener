@@ -1,5 +1,4 @@
 defmodule UrlShortenerWeb.Live.Create do
-  alias Phoenix.LiveView.Socket
   use UrlShortenerWeb, :live_view
 
   alias UrlShortener.Shortener
@@ -25,7 +24,7 @@ defmodule UrlShortenerWeb.Live.Create do
 
   def handle_event("save", %{"link" => link_params}, socket) do
     case Shortener.create_link(link_params) do
-      {:ok, link} ->
+      {:ok, _link} ->
         socket = put_flash(socket, :info, "link created")
         # update this to show that the link's created at the bottom of the card.
 
