@@ -87,6 +87,7 @@ defmodule UrlShortenerWeb do
       import UrlShortenerWeb.CoreComponents
       import UrlShortenerWeb.Gettext
       import UrlShortenerWeb.ThemeToggle
+      import UrlShortenerWeb.ShortInput
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

@@ -1,5 +1,5 @@
-<header class="flex items-center gap-8 bg-slate-300 dark:bg-slate-700 text-black dark:text-white p-4">
-  <h1 class="text-2xl">URL Shortener</h1>
+<header class="flex items-center gap-8 bg-slate-300 dark:bg-slate-700 text-black dark:text-white p-4 justify-between sm:justify-start">
+  <h1 class="text-2xl font-bold">Link Shortener</h1>
   <nav>
     <ul>
       <li>
@@ -7,10 +7,10 @@
       </li>
     </ul>
   </nav>
-  <div class="flex-grow"></div>
-  <.theme_toggle />
+  <div class="hidden sm:block flex-grow"></div>
+  <.theme_toggle class="hidden sm:flex"/>
 </header>
-<main class="site-content">
+<main class="site-content flex">
   <.flash_group flash={@flash} />
   <%= @inner_content %>
 </main>

@@ -1,14 +1,16 @@
 defmodule UrlShortenerWeb.ThemeToggle do
   use Phoenix.Component
 
+  attr :class, :string, default: nil
+
   def theme_toggle(assigns) do
     ~H"""
-    <span id="theme_toggles" phx-update="ignore" class="isolate inline-flex shadow-sm">
+    <span id="theme_toggles" phx-update="ignore" class={["isolate inline-flex shadow-sm", @class]}>
       <button
         id="toggle_light"
         type="button"
         data-active="false"
-        class="relative inline-flex items-center px-3 py-2 ring-1 ring-inset ring-slate-700 dark:ring-slate-300 focus:z-10 rounded-l {@class}"
+        class="relative inline-flex items-center px-3 py-2 ring-1 ring-inset ring-slate-700 dark:ring-slate-300 focus:z-10 rounded-l"
       >
 
         <svg
@@ -35,7 +37,6 @@ defmodule UrlShortenerWeb.ThemeToggle do
           />
         </svg>
       </button>
-
       <button
         id="toggle_system"
         type="button"

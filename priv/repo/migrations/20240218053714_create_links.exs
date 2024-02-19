@@ -3,9 +3,10 @@ defmodule UrlShortener.Repo.Migrations.CreateLinks do
 
   def up do
     create table(:links) do
-      add :path, :text, null: false
-      add :url, :string, [size: 2083, null: false]
+      add :path, :text, [size: 64, null: false]
+      add :url, :string, [size: 2048, null: false]
       add :creator, :text, null: false
+      add :active, :boolean, default: true
 
       timestamps(type: :utc_datetime)
     end

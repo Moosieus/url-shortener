@@ -53,3 +53,7 @@ Why I err away from `views.view_count`:
 Why timescaledb!?
 - Writing to a log is never blocking.
 - You also aren't persisting useful metadata, which would be desirable in a link shortener.
+
+**New idea:**
+- Use soft deletion on `links` so the foreign keys on `views` are always concrete.
+- Inactive links can't be reactivated.

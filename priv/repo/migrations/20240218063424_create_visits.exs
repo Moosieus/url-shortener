@@ -6,7 +6,7 @@ defmodule UrlShortener.Repo.Migrations.CreateVisits do
       add :timestamp, :utc_datetime, null: false
       add :ip_address, :inet, null: false
       add :request_headers, :map, null: false
-      add :link_id, references(:links, on_delete: :nilify_all)
+      add :link_id, references(:links)
     end
 
     create index(:visits, [:link_id])
