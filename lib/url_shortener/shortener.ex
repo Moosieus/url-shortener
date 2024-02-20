@@ -45,7 +45,11 @@ defmodule UrlShortener.Shortener do
       ** (Ecto.NoResultsError)
 
   """
-  def get_link!(id), do: Repo.get!(Link, id)
+  def get_link!(id) when is_integer(id), do: Repo.get!(Link, id)
+
+  def find_link(path) do
+    Repo.get_by(Link, [path: path])
+  end
 
   @doc """
   Creates a link.

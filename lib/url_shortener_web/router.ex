@@ -19,6 +19,7 @@ defmodule UrlShortenerWeb.Router do
 
     live "/", Live.Create, :index
     live  "/stats", Live.MyLinks, :index
+    get "/:path", Redirect, :index
   end
 
   # Other scopes may use custom stacks.

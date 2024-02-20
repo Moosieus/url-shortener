@@ -1,9 +1,11 @@
 <header class="flex items-center gap-8 bg-slate-300 dark:bg-slate-700 text-black dark:text-white p-4 justify-between sm:justify-start">
-  <h1 class="text-2xl font-bold">Link Shortener</h1>
+  <h1 class="text-2xl font-bold">
+    <.link navigate={~p"/"}>Link Shortener</.link>
+  </h1>
   <nav>
     <ul>
       <li>
-        <a class="italic underline" href={~p"/stats"}>My Link Stats</a>
+        <.link class="italic underline" navigate={~p"/stats"}>My Link Stats</.link>
       </li>
     </ul>
   </nav>

@@ -1,9 +1,7 @@
 defmodule UrlShortenerWeb.Live.MyLinks do
-  alias UrlShortener.Shortener
   use UrlShortenerWeb, :live_view
 
-  alias UrlShortener.Shortener.Link
-  #alias UrlShortener.Shortener
+  alias UrlShortener.Shortener
 
   def mount(_params, session, socket) do
     %{"_csrf_token" => user_id} = session
