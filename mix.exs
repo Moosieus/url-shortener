@@ -58,7 +58,9 @@ defmodule UrlShortener.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
-      {:ecto_network, "~> 1.5.0"}
+      {:ecto_network, "~> 1.5.0"},
+      {:nanoid, "~> 2.1.0"},
+      {:zbase32, "~> 2.0.0"},
     ]
   end
 

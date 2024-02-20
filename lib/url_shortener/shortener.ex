@@ -20,8 +20,15 @@ defmodule UrlShortener.Shortener do
       [%Link{}, ...]
 
   """
-  def list_links do
-    Repo.all(Link)
+  def list_links(user_id) when is_binary(user_id) do
+    query = from(
+      l in Link,
+      where: l.creator == ^user_id,
+      order_by: [desc: l.inserted_at],
+      select: {l.path, l}
+    )
+
+    Repo.all(query)
   end
 
   @doc """

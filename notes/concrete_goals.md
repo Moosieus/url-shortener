@@ -36,10 +36,10 @@ Represent users by their anonymous sessions since the rubric excludes it.
 - You could readily represent that constraint in an Ecto changeset as well.
 
 Add some quality of life features, namely:
-- Link validation (Check response header with Mint)
+- ~~Link validation (Check response header with Mint)~~ (saving time)
 - Vanity URLs (very nice to have)
 - Real time updates on stats page
-- Light and dark mode frontend
+- ~~Light and dark mode frontend~~ (done!)
 
 These things crossed my mind, but I'm making concessions for the sake of time:
 - Ignoring soft deletion of data since this is just a technical for now.

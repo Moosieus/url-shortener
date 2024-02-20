@@ -18,6 +18,7 @@ defmodule UrlShortenerWeb.Router do
     pipe_through :browser
 
     live "/", Live.Create, :index
+    live  "/stats", Live.MyLinks, :index
   end
 
   # Other scopes may use custom stacks.
