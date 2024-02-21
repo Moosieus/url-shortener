@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody class="bg-slate-200 dark:bg-slate-800 divide-y divide-slate-500">
-          <tr id={path} :for={{path, link} <- @links} class="divide-x divide-slate-500">
+          <tr id={path} :for={{path, link, total_visits} <- @links} class="divide-x divide-slate-500">
             <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis">
             <a class="underline" href={"/#{link.path}"} target="_blank">
               <%= link.path %>
@@ -25,7 +25,9 @@
                 <%= link.url %>
               </a>
             </td>
-            <td class="px-3 py-4 w-28">999,999,999</td>
+            <td class="px-3 py-4 w-28">
+              <%= total_visits || 0 %>
+            </td>
             <td id={"#{path}-created_at"} class="px-4 py-4" phx-hook="locale_time">
               <%= link.inserted_at %>
             </td>

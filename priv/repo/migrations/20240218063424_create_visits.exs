@@ -5,13 +5,16 @@ defmodule UrlShortener.Repo.Migrations.CreateVisits do
     execute("CREATE EXTENSION IF NOT EXISTS timescaledb")
 
     create table(:visits) do
-      add :timestamp, :utc_datetime, null: false
+      add :timestamp, :utc_datetime, [null: false, primary_key: true]
       add :ip_address, :inet, null: false
       add :req_headers, :map, null: false
       add :link_id, references(:links)
+
     end
 
-    create index(:visits, [:link_id])
+    create index(:visits, [:link_id, :timestamp])
+
+    execute("SELECT create_hypertable('visits', by_range('timestamp'))")
   end
 
   def down do

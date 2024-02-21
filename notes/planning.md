@@ -74,3 +74,7 @@ This approach preferable to just making every session cookie a potential user on
 - Limit input url sizes
 - ensure all shortened paths are unique
 - Only check the respone status of any sites, don't parse anything else
+
+# Note about visit timestamps
+- Don't use a default for insertion in either ecto or the database. It's more correct that the timestamp is recorded close to the moment of request.
+- If logging visits ended up having to go through a longer pipeline or Kafka, the timestamp could be considerably off.

@@ -41,13 +41,9 @@ defmodule UrlShortenerWeb.Live.MyLinks.ToggleActive do
 
     case Shortener.toggle_link(link) do
       {:ok, %Link{} = link} ->
-        msg = if link.active, do: "Live activated.", else: "Link deactivated."
-
-        socket = assign(socket, link: link)
-
         on_toggle.(link)
 
-        {:noreply, socket}
+        {:noreply, assign(socket, link: link)}
 
       {:error, %Ecto.Changeset{} = _changeset} ->
         socket = put_flash(socket, :error, "placeholder, it didn't work!")
