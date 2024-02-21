@@ -91,6 +91,11 @@ defmodule UrlShortener.Shortener do
     |> Repo.update()
   end
 
+  @doc false
+  def change_link(%Link{} = link, attrs \\ %{}) do
+    Link.changeset(link, attrs)
+  end
+
   ## Visits
 
   @doc """
