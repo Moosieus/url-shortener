@@ -17,11 +17,11 @@ defmodule UrlShortener.Shortener do
 
   ## Examples
 
-      iex> list_links("abcd...")
+      iex> list_user_links("abcd...")
       [%Link{}, ...]
 
   """
-  def list_links(user_id) when is_binary(user_id) do
+  def list_user_links(user_id) when is_binary(user_id) do
     query = from(
       l in Link,
       left_join: agg in subquery(visit_total_frag()),
@@ -41,22 +41,6 @@ defmodule UrlShortener.Shortener do
       group_by: d.link_id
     )
   end
-
-  @doc """
-  Gets a single link.
-
-  Raises `Ecto.NoResultsError` if the Link does not exist.
-
-  ## Examples
-
-      iex> get_link!(123)
-      %Link{}
-
-      iex> get_link!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_link!(id) when is_integer(id), do: Repo.get!(Link, id)
 
   @spec find_link(binary()) :: %Link{} | nil
   def find_link(path) when is_binary(path) do
@@ -107,29 +91,10 @@ defmodule UrlShortener.Shortener do
     |> Repo.update()
   end
 
-  ## More Link methods. Should only be used for administrative purposes.
-
-  @doc false
-  def update_link(%Link{} = link, attrs) do
-    link
-    |> Link.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc false
-  def delete_link(%Link{} = link) do
-    Repo.delete(link)
-  end
-
-  @doc false
-  def change_link(%Link{} = link, attrs \\ %{}) do
-    Link.changeset(link, attrs)
-  end
-
   ## Visits
 
   @doc """
-  Creates a visit.
+  Logs a visit.
 
   ## Examples
 

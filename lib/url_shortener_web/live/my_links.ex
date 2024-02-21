@@ -12,7 +12,7 @@ defmodule UrlShortenerWeb.Live.MyLinks do
     socket =
       socket
       |> assign(user_id: user_id)
-      |> assign(links: Shortener.list_links(user_id))
+      |> assign(links: Shortener.list_user_links(user_id))
 
     {:ok, socket}
   end

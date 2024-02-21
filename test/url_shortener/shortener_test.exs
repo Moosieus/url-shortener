@@ -10,9 +10,9 @@ defmodule UrlShortener.ShortenerTest do
 
     @invalid_attrs %{path: nil, url: nil, creator: nil}
 
-    test "list_links/0 returns all links" do
+    test "list_user_links/0 returns all links" do
       link = link_fixture()
-      assert Shortener.list_links() == [link]
+      assert Shortener.list_user_links() == [link]
     end
 
     test "get_link!/1 returns the link with given id" do
