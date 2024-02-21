@@ -1,6 +1,6 @@
 <header class="flex items-center gap-8 bg-slate-300 dark:bg-slate-700 text-black dark:text-white p-4 justify-between sm:justify-start">
   <h1 class="text-2xl font-bold">
-    <.link navigate={~p"/"}>Link Shortener (Demo)</.link>
+    <.link navigate={~p"/"}>Link Shortener Demo</.link>
   </h1>
   <nav>
     <ul>
@@ -16,6 +16,3 @@
   <.flash_group flash={@flash} />
   <%= @inner_content %>
 </main>
-<footer class="text-center bg-slate-300 dark:bg-slate-700 text-black dark:text-white p-2">
-  <span>© <%= Date.utc_today().year %></span>
-</footer>

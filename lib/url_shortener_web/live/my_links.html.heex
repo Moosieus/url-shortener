@@ -1,47 +1,48 @@
 <div class="flex-grow flex justify-center items-center px-3 sm:mx-auto max-w-screen-lg">
-
   <%= if match?([_ | _], @links) do %>
     <div class="w-full">
       <h1 class="text-2xl font-bold">Link Stats</h1>
-      <table class="w-full text-sm text-left table-auto mt-1">
-        <thead class="bg-slate-300 dark:bg-slate-700 text-base">
-          <tr class="divide-x divide-slate-500">
-            <th scope="col" class="px-3 py-3 w-36">Short Path</th>
-            <th scope="col" class="px-3 py-3">Source Link</th>
-            <th scope="col" class="px-3 py-3 w-28">Visits</th>
-            <th scope="col" class="px-3 py-3 w-48">Date Created</th>
-            <th scope="col" class="px-3 py-3 w-20 text-center">Active</th>
-          </tr>
-        </thead>
-        <tbody class="bg-slate-200 dark:bg-slate-800 divide-y divide-slate-500">
-          <tr id={path} :for={{path, link, total_visits} <- @links} class="divide-x divide-slate-500">
-            <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis">
-            <a class="underline" href={"/#{link.path}"} target="_blank">
-              <%= link.path %>
-            </a>
-            </td>
-            <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis max-w-0">
-              <a class="underline" href={link.url} target="_blank">
-                <%= link.url %>
+      <div class="rounded-md overflow-x-auto w-full">
+        <table class="bg-slate-200 dark:bg-slate-800 text-left mt-1 w-full table-auto overflow-hidden rounded-md">
+          <thead class="bg-slate-300 dark:bg-slate-700 text-base">
+            <tr class="divide-x divide-slate-500">
+              <th scope="col" class="px-3 py-3 w-36">Short Path</th>
+              <th scope="col" class="px-3 py-3">Source Link</th>
+              <th scope="col" class="px-3 py-3 w-28">Visits</th>
+              <th scope="col" class="px-3 py-3 w-52">Date Created</th>
+              <th scope="col" class="px-3 py-3 w-20 text-center">Active</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-500">
+            <tr id={path} :for={{path, link, total_visits} <- @links} class="divide-x divide-slate-500">
+              <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis">
+              <a class="underline" href={"/#{link.path}"} target="_blank">
+                <%= link.path %>
               </a>
-            </td>
-            <td class="px-3 py-4 w-28">
-              <%= total_visits || 0 %>
-            </td>
-            <td id={"#{path}-created_at"} class="px-4 py-4" phx-hook="locale_time">
-              <%= link.inserted_at %>
-            </td>
-            <td class="px-3 py-4 text-center w-20">
-              <.live_component
-                id={"#{path}-toggle"}
-                module={ToggleActive}
-                link={link}
-                on_toggle={fn link -> send(self(), {:toggled_link, link}) end}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+              <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis max-w-0">
+                <a class="underline" href={link.url} target="_blank">
+                  <%= link.url %>
+                </a>
+              </td>
+              <td class="px-3 py-4 w-28">
+                <%= total_visits || 0 %>
+              </td>
+              <td id={"#{path}-created_at"} class="px-4 py-4" phx-hook="locale_time">
+                <%= link.inserted_at %>
+              </td>
+              <td class="px-3 py-4 text-center w-20">
+                <.live_component
+                  id={"#{path}-toggle"}
+                  module={ToggleActive}
+                  link={link}
+                  on_toggle={fn link -> send(self(), {:toggled_link, link}) end}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table> 
+      </div>
       <div>
         <a class="underline italic" href="http://">
           export to csv
