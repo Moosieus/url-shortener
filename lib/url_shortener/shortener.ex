@@ -46,7 +46,7 @@ defmodule UrlShortener.Shortener do
     )
   end
 
-  @spec find_link(binary()) :: %Link{} | nil
+  @spec find_link(binary()) :: Link.t() | nil
   def find_link(path) when is_binary(path) do
     query =
       from(

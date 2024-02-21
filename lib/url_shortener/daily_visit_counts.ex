@@ -1,4 +1,8 @@
 defmodule UrlShortener.DailyVisitCounts do
+  @moduledoc """
+  Maps to the continuously aggregated `daily_visit_counts` view (Timescaledb).
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,10 +1,12 @@
 defmodule UrlShortenerWeb.ShortInput do
+  @moduledoc """
+  Copy of the default input Core Component with some custom styling.
+  Used to prepend the current domain in the input field.
+  """
+
   use Phoenix.Component
   import UrlShortenerWeb.CoreComponents, only: [translate_error: 1, label: 1, error: 1]
 
-  @doc """
-  Copy of the default input Core Component with some custom styling.
-  """
   attr :id, :any, default: nil
   attr :name, :any
   attr :label, :string, default: nil

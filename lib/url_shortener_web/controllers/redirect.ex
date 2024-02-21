@@ -1,4 +1,7 @@
 defmodule UrlShortenerWeb.Redirect do
+  @moduledoc """
+  Dedicated endpoint module for redirecting users from shortened links.
+  """
   use UrlShortenerWeb, :controller
 
   alias Phoenix.PubSub

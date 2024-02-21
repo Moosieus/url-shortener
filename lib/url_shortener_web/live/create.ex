@@ -1,5 +1,8 @@
 defmodule UrlShortenerWeb.Live.Create do
-  alias UrlShortener.Shortener.Utils
+  @moduledoc """
+  LiveView for users to create short links.
+  """
+
   use UrlShortenerWeb, :live_view
 
   alias UrlShortener.Shortener
@@ -27,10 +30,7 @@ defmodule UrlShortenerWeb.Live.Create do
   end
 
   def handle_event("save", %{"link" => link_params}, socket) do
-    link_params =
-      link_params
-      |> Map.update!("path", &gen_path_if_empty/1)
-      |> Map.put("creator", socket.assigns.user_id)
+    link_params = Map.put(link_params, "creator", socket.assigns.user_id)
 
     case Shortener.create_link(link_params) do
       {:ok, link} ->
@@ -41,15 +41,6 @@ defmodule UrlShortenerWeb.Live.Create do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
-    end
-  end
-
-  # The proper way to do this would be to declare a custom Ecto type.
-  # Time permitting I'll refactor this into one.
-  defp gen_path_if_empty(path) when is_binary(path) do
-    case path do
-      "" -> Utils.gen_short_id()
-      _ -> path
     end
   end
 end

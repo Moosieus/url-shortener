@@ -1,7 +1,11 @@
-defmodule UrlShortener.Shortener.Utils do
-  # Cribbed from https://gist.github.com/atomkirk/74b39b5b09c7d0f21763dd55b877f998
+defmodule UrlShortener.Shortener.Link.Utils do
+  @moduledoc """
+  Validation and default path generation for Link.
+  """
 
-  # require at least a scheme, host, and tld
+  ## URL validation. Require at least a scheme, host, and tld.
+  ## Adapted from https://gist.github.com/atomkirk/74b39b5b09c7d0f21763dd55b877f998
+
   def validate_url(changeset, field, opts \\ []) do
     import Ecto.Changeset, only: [validate_change: 3]
 
@@ -31,6 +35,8 @@ defmodule UrlShortener.Shortener.Utils do
       [_] -> false
     end
   end
+
+  ## ID generation
 
   @nano_id_size 5
   @alphabet_str "ybndrfg8ejkmcpqxot1uwisza345h769"

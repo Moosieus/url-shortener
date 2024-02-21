@@ -1,4 +1,7 @@
 defmodule UrlShortenerWeb.ThemeToggle do
+  @moduledoc """
+  Light/dark mode toggle component. Only works as a singleton for now.
+  """
   use Phoenix.Component
 
   attr :class, :string, default: nil

@@ -1,4 +1,7 @@
 defmodule UrlShortenerWeb.Export do
+  @moduledoc """
+  Dedicated endpoint module for exporting a user's link stats to a spreadsheet (csv).
+  """
   use UrlShortenerWeb, :controller
 
   alias UrlShortener.Shortener.Link

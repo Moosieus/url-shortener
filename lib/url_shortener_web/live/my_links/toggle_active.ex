@@ -1,4 +1,5 @@
 defmodule UrlShortenerWeb.Live.MyLinks.ToggleActive do
+  @moduledoc false
   use Phoenix.LiveComponent
 
   # this needs to be a live component so it can reference state.

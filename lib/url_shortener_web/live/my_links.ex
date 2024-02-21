@@ -1,4 +1,8 @@
 defmodule UrlShortenerWeb.Live.MyLinks do
+  @moduledoc """
+  LiveView for users to manage links they've created, and view stats for them.
+  """
+
   use UrlShortenerWeb, :live_view
 
   alias UrlShortener.Shortener

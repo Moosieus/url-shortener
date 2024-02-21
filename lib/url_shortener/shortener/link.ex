@@ -1,9 +1,11 @@
 defmodule UrlShortener.Shortener.Link do
+  @moduledoc """
+  Represents a redirect link created by a user.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias UrlShortener.Shortener.Utils
-  import UrlShortener.Shortener.Utils, only: [validate_url: 2]
+  alias UrlShortener.Shortener.Link.Utils
 
   schema "links" do
     field :path, :string, autogenerate: {Utils, :gen_short_id, []}
@@ -21,7 +23,7 @@ defmodule UrlShortener.Shortener.Link do
     |> validate_required([:url, :creator, :active])
     |> validate_length(:url, min: 1, max: 2083)
     |> validate_length(:path, min: 1, max: 64)
-    |> validate_url(:url)
+    |> Utils.validate_url(:url)
     # need to use message here!
     |> unique_constraint(:path)
   end

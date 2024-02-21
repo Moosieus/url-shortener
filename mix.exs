@@ -62,7 +62,8 @@ defmodule UrlShortener.MixProject do
       {:nanoid, "~> 2.1.0"},
       {:zbase32, "~> 2.0.0"},
       {:remote_ip, "~> 1.1.0"},
-      {:nimble_csv, "~> 1.1"}
+      {:nimble_csv, "~> 1.1"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 
