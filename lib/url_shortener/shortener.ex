@@ -28,7 +28,7 @@ defmodule UrlShortener.Shortener do
       on: l.id == agg.link_id,
       where: l.creator == ^user_id,
       order_by: [desc: l.inserted_at],
-      select: {l.path, l, coalesce(agg.visit_total, 0)}
+      select: {l.id, l, coalesce(agg.visit_total, 0)}
     )
 
     Repo.all(query)

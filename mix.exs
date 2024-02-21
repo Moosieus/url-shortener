@@ -61,7 +61,8 @@ defmodule UrlShortener.MixProject do
       {:ecto_network, "~> 1.5.0"},
       {:nanoid, "~> 2.1.0"},
       {:zbase32, "~> 2.0.0"},
-      {:remote_ip, "~> 1.1.0"}
+      {:remote_ip, "~> 1.1.0"},
+      {:nimble_csv, "~> 1.1"}
     ]
   end
 

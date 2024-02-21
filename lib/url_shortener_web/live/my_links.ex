@@ -21,13 +21,13 @@ defmodule UrlShortenerWeb.Live.MyLinks do
     {:ok, socket}
   end
 
-  def handle_info({:visit, _link_id, link_path}, socket) do
+  def handle_info({:visit, link_id}, socket) do
     links = socket.assigns.links
 
     links =
-      case List.keyfind(links, link_path, 0) do
-        {path, link, visits} ->
-          List.keyreplace(links, link_path, 0, {path, link, visits+1})
+      case List.keyfind(links, link_id, 0) do
+        {_, link, visits} ->
+          List.keyreplace(links, link_id, 0, {link_id, link, visits+1})
         nil ->
           links
       end

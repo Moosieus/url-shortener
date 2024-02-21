@@ -19,6 +19,7 @@ defmodule UrlShortenerWeb.Router do
 
     live "/", Live.Create, :index
     live  "/stats", Live.MyLinks, :index
+    get "/export/:user_id", Export, :index
     get "/:path", Redirect, :index
   end
 

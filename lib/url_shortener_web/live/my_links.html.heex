@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-500">
-            <tr id={path} :for={{path, link, total_visits} <- @links} class="divide-x divide-slate-500">
+            <tr id={"#{link.id}"} :for={{_link_id, %Link{} = link, total_visits} <- @links} class="divide-x divide-slate-500">
               <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis">
               <a class="underline" href={"/#{link.path}"} target="_blank">
                 <%= link.path %>
@@ -28,12 +28,12 @@
               <td class="px-3 py-4 w-28">
                 <%= total_visits || 0 %>
               </td>
-              <td id={"#{path}-created_at"} class="px-4 py-4" phx-hook="locale_time">
+              <td id={"#{link.id}-created_at"} class="px-4 py-4" phx-hook="locale_time">
                 <%= link.inserted_at %>
               </td>
               <td class="px-3 py-4 text-center w-20">
                 <.live_component
-                  id={"#{path}-toggle"}
+                  id={"#{link.id}-toggle"}
                   module={ToggleActive}
                   link={link}
                   on_toggle={fn link -> send(self(), {:toggled_link, link}) end}
@@ -44,7 +44,7 @@
         </table> 
       </div>
       <div>
-        <a class="underline italic" href="http://">
+        <a class="underline italic" href={~p"/export/#{@user_id}"} target="_blank">
           export to csv
         </a>
       </div>

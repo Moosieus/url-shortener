@@ -21,7 +21,7 @@ defmodule UrlShortenerWeb.Redirect do
       |> redirect(external: link.url)
       |> halt()
 
-    PubSub.broadcast(UrlShortener.PubSub, "user_visits:#{link.creator}", {:visit, link.id, link.path})
+    PubSub.broadcast(UrlShortener.PubSub, "user_visits:#{link.creator}", {:visit, link.id})
 
     Shortener.log_visit(%{
       timestamp: DateTime.utc_now(:millisecond),
