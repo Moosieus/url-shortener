@@ -28,7 +28,7 @@ defmodule UrlShortener.Shortener do
       on: l.id == agg.link_id,
       where: l.creator == ^user_id,
       order_by: [desc: l.inserted_at],
-      select: {l.path, l, agg.visit_total}
+      select: {l.path, l, coalesce(agg.visit_total, 0)}
     )
 
     Repo.all(query)
@@ -37,7 +37,10 @@ defmodule UrlShortener.Shortener do
   def visit_total_frag() do
     from(
       d in DailyVisitCounts,
-      select: %{link_id: d.link_id, visit_total: type(sum(d.visit_count), :integer)},
+      select: %{
+        link_id: d.link_id,
+        visit_total: type(sum(d.visit_count), :integer)
+      },
       group_by: d.link_id
     )
   end
@@ -71,7 +74,6 @@ defmodule UrlShortener.Shortener do
     |> Repo.insert()
   end
 
-
   @doc """
   Deactivates a link, removing it from the unique `path` index
   and indicating it should no longer redirect.
@@ -95,8 +97,6 @@ defmodule UrlShortener.Shortener do
   def change_link(%Link{} = link, attrs \\ %{}) do
     Link.changeset(link, attrs)
   end
-
-  ## Visits
 
   @doc """
   Logs a visit.

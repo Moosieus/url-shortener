@@ -33,17 +33,13 @@ defmodule UrlShortenerWeb.Live.Create do
       |> Map.update!("path", &gen_path_if_empty/1)
       |> Map.put("creator", socket.assigns.user_id)
 
-    IO.inspect(link_params)
-
     case Shortener.create_link(link_params) do
       {:ok, link} ->
         socket = put_flash(socket, :info, "link created: #{link.path}")
-        IO.inspect(link, label: "yay :D")
         # update this to show that the link's created at the bottom of the card.
 
         {:noreply, socket}
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset, label: "no >:(")
 
         {:noreply, assign(socket, form: to_form(changeset))}
     end

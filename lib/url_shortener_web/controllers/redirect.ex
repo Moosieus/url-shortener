@@ -1,6 +1,7 @@
 defmodule UrlShortenerWeb.Redirect do
   use UrlShortenerWeb, :controller
 
+  alias Phoenix.PubSub
   alias UrlShortener.Shortener
   alias UrlShortener.Shortener.Link
 
@@ -19,6 +20,8 @@ defmodule UrlShortenerWeb.Redirect do
       conn
       |> redirect(external: link.url)
       |> halt()
+
+    PubSub.broadcast(UrlShortener.PubSub, "user_visits:#{link.creator}", {:visit, link.id, link.path})
 
     Shortener.log_visit(%{
       timestamp: DateTime.utc_now(:millisecond),
