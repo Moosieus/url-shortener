@@ -30,12 +30,12 @@
               <%= link.inserted_at %>
             </td>
             <td class="px-3 py-4 text-center w-20">
-              <%= if link.active do %>
-                <.icon class="cursor-pointer text-green-800 dark:text-green-300" name="hero-check" />
-              <% else %>
-                <.icon class="cursor-pointer text-red-800 dark:text-red-300" name="hero-archive-box" />
-              <% end %>
-
+              <.live_component
+                id={"#{path}-toggle"}
+                module={ToggleActive}
+                link={link}
+                on_toggle={fn link -> send(self(), {:toggled_link, link}) end}
+              />
             </td>
           </tr>
         </tbody>

@@ -9,7 +9,7 @@ defmodule UrlShortener.Shortener.Visit do
   schema "visits" do
     field :timestamp, :utc_datetime
     field :ip_address, EctoNetwork.INET
-    field :request_headers, :map
+    field :req_headers, :map
 
     belongs_to :link, Link
   end
@@ -17,7 +17,7 @@ defmodule UrlShortener.Shortener.Visit do
   @doc false
   def changeset(visit, attrs) do
     visit
-    |> cast(attrs, [:timestamp, :ip_address, :request_headers, :link_id])
-    |> validate_required([:timestamp, :ip_address, :request_headers, :link_id])
+    |> cast(attrs, [:timestamp, :ip_address, :req_headers, :link_id])
+    |> validate_required([:timestamp, :ip_address, :req_headers, :link_id])
   end
 end

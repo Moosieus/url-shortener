@@ -12,11 +12,11 @@ defmodule UrlShortener.Shortener do
   ## Links
 
   @doc """
-  Returns the list of links.
+  Returns the list of links for the given user.
 
   ## Examples
 
-      iex> list_links()
+      iex> list_links("abcd...")
       [%Link{}, ...]
 
   """
@@ -47,8 +47,15 @@ defmodule UrlShortener.Shortener do
   """
   def get_link!(id) when is_integer(id), do: Repo.get!(Link, id)
 
-  def find_link(path) do
-    Repo.get_by(Link, [path: path])
+  @spec find_link(binary()) :: %Link{} | nil
+  def find_link(path) when is_binary(path) do
+    query = from(
+      l in Link,
+      where: l.path == ^path,
+      where: l.active == true
+    )
+
+    Repo.one(query)
   end
 
   @doc """
@@ -69,49 +76,41 @@ defmodule UrlShortener.Shortener do
     |> Repo.insert()
   end
 
+
   @doc """
-  Updates a link.
+  Deactivates a link, removing it from the unique `path` index
+  and indicating it should no longer redirect.
 
   ## Examples
 
-      iex> update_link(link, %{field: new_value})
-      {:ok, %Link{}}
+    iex> toggle_link(link)
+    {:ok, %Link{}}
 
-      iex> update_link(link, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+    iex> toggle_link(link)
+    {:error, %Ecto.Changeset{}}
 
   """
+  def toggle_link(%Link{active: active} = link) do
+    link
+    |> Link.changeset(%{active: !active})
+    |> Repo.update()
+  end
+
+  ## More Link methods. Should only be used for administrative purposes.
+
+  @doc false
   def update_link(%Link{} = link, attrs) do
     link
     |> Link.changeset(attrs)
     |> Repo.update()
   end
 
-  @doc """
-  Deletes a link.
-
-  ## Examples
-
-      iex> delete_link(link)
-      {:ok, %Link{}}
-
-      iex> delete_link(link)
-      {:error, %Ecto.Changeset{}}
-
-  """
+  @doc false
   def delete_link(%Link{} = link) do
     Repo.delete(link)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking link changes.
-
-  ## Examples
-
-      iex> change_link(link)
-      %Ecto.Changeset{data: %Link{}}
-
-  """
+  @doc false
   def change_link(%Link{} = link, attrs \\ %{}) do
     Link.changeset(link, attrs)
   end
@@ -152,14 +151,14 @@ defmodule UrlShortener.Shortener do
 
   ## Examples
 
-      iex> create_visit(%{field: value})
+      iex> log_visit(%{field: value})
       {:ok, %Visit{}}
 
-      iex> create_visit(%{field: bad_value})
+      iex> log_visit(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_visit(attrs \\ %{}) do
+  def log_visit(attrs \\ %{}) do
     %Visit{}
     |> Visit.changeset(attrs)
     |> Repo.insert()

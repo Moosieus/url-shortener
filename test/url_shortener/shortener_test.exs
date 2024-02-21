@@ -66,7 +66,7 @@ defmodule UrlShortener.ShortenerTest do
 
     import UrlShortener.ShortenerFixtures
 
-    @invalid_attrs %{timestamp: nil, ip_address: nil, request_headers: nil}
+    @invalid_attrs %{timestamp: nil, ip_address: nil, req_headers: nil}
 
     test "list_visits/0 returns all visits" do
       visit = visit_fixture()
@@ -78,27 +78,27 @@ defmodule UrlShortener.ShortenerTest do
       assert Shortener.get_visit!(visit.id) == visit
     end
 
-    test "create_visit/1 with valid data creates a visit" do
-      valid_attrs = %{timestamp: ~U[2024-02-17 06:33:00Z], ip_address: "some ip_address", request_headers: %{}}
+    test "log_visit/1 with valid data creates a visit" do
+      valid_attrs = %{timestamp: ~U[2024-02-17 06:33:00Z], ip_address: "some ip_address", req_headers: %{}}
 
-      assert {:ok, %Visit{} = visit} = Shortener.create_visit(valid_attrs)
+      assert {:ok, %Visit{} = visit} = Shortener.log_visit(valid_attrs)
       assert visit.timestamp == ~U[2024-02-17 06:33:00Z]
       assert visit.ip_address == "some ip_address"
-      assert visit.request_headers == %{}
+      assert visit.req_headers == %{}
     end
 
-    test "create_visit/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Shortener.create_visit(@invalid_attrs)
+    test "log_visit/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Shortener.log_visit(@invalid_attrs)
     end
 
     test "update_visit/2 with valid data updates the visit" do
       visit = visit_fixture()
-      update_attrs = %{timestamp: ~U[2024-02-18 06:33:00Z], ip_address: "some updated ip_address", request_headers: %{}}
+      update_attrs = %{timestamp: ~U[2024-02-18 06:33:00Z], ip_address: "some updated ip_address", req_headers: %{}}
 
       assert {:ok, %Visit{} = visit} = Shortener.update_visit(visit, update_attrs)
       assert visit.timestamp == ~U[2024-02-18 06:33:00Z]
       assert visit.ip_address == "some updated ip_address"
-      assert visit.request_headers == %{}
+      assert visit.req_headers == %{}
     end
 
     test "update_visit/2 with invalid data returns error changeset" do

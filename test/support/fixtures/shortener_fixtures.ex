@@ -28,10 +28,10 @@ defmodule UrlShortener.ShortenerFixtures do
       attrs
       |> Enum.into(%{
         ip_address: "some ip_address",
-        request_headers: %{},
+        req_headers: %{},
         timestamp: ~U[2024-02-17 06:33:00Z]
       })
-      |> UrlShortener.Shortener.create_visit()
+      |> UrlShortener.Shortener.log_visit()
 
     visit
   end

@@ -11,7 +11,7 @@ defmodule UrlShortener.Repo.Migrations.CreateLinks do
       timestamps(type: :utc_datetime)
     end
 
-    create unique_index(:links, [:path], name: "links_path_uniq")
+    create unique_index(:links, [:path], name: "links_path_uniq", where: "active IS true")
 
     create constraint(:links, :path_not_blank, check: "path != ''")
     create constraint(:links, :url_not_blank, check: "url != ''")

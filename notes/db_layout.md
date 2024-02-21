@@ -14,7 +14,7 @@ Tentative database layout:
 - link_id:fkey
 - timestamp:utc_timestamp
 - ip_address:inet
-- request_headers:jsonb
+- req_headers:jsonb
 
 ```sh
 phx.gen.context Shortener Link links path:text url:text creator:text
@@ -26,7 +26,7 @@ An argument could also be made for using explicit timezones with datetimes, but 
 
 
 ```sh
-mix phx.gen.context Shortener Visit visits link_id:references:link timestamp:utc_datetime ip_address:text request_headers:map
+mix phx.gen.context Shortener Visit visits link_id:references:link timestamp:utc_datetime ip_address:text req_headers:map
 # this one needed lots of work...
 ```
 
