@@ -22,14 +22,15 @@ defmodule UrlShortener.Shortener do
 
   """
   def list_user_links(user_id) when is_binary(user_id) do
-    query = from(
-      l in Link,
-      left_join: agg in subquery(visit_total_frag()),
-      on: l.id == agg.link_id,
-      where: l.creator == ^user_id,
-      order_by: [desc: l.inserted_at],
-      select: {l.id, l, coalesce(agg.visit_total, 0)}
-    )
+    query =
+      from(
+        l in Link,
+        left_join: agg in subquery(visit_total_frag()),
+        on: l.id == agg.link_id,
+        where: l.creator == ^user_id,
+        order_by: [desc: l.inserted_at],
+        select: {l.id, l, coalesce(agg.visit_total, 0)}
+      )
 
     Repo.all(query)
   end
@@ -47,11 +48,12 @@ defmodule UrlShortener.Shortener do
 
   @spec find_link(binary()) :: %Link{} | nil
   def find_link(path) when is_binary(path) do
-    query = from(
-      l in Link,
-      where: l.path == ^path,
-      where: l.active == true
-    )
+    query =
+      from(
+        l in Link,
+        where: l.path == ^path,
+        where: l.active == true
+      )
 
     Repo.one(query)
   end

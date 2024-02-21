@@ -1,11 +1,20 @@
 <div class="flex-grow flex justify-center items-center px-4 max-w-md sm:mx-auto">
-  <.form for={@form} phx-change="validate" phx-submit="save" class="w-full bg-slate-300 dark:bg-slate-700 p-4 rounded-md">
+  <.form
+    for={@form}
+    phx-change="validate"
+    phx-submit="save"
+    class="w-full bg-slate-300 dark:bg-slate-700 p-4 rounded-md"
+  >
     <h1 class="text-xl font-bold">Paste your long link here:</h1>
-    <.input phx-debounce="300" field={@form[:url]} placeholder="https://averyveryveryverylonglink.com"/>
+    <.input
+      phx-debounce="300"
+      field={@form[:url]}
+      placeholder="https://averyveryveryverylonglink.com"
+    />
     <h1 class="text-lg font-bold mt-4">Enter a vanity link (optional):</h1>
-      <.short_input phx-debounce="300" field={@form[:path]}/>
-      <div class="text-center mt-4">
-        <.button class="!text-base font-bold bg-green-600">Generate short link</.button>
-      </div>
+    <.short_input phx-debounce="300" field={@form[:path]} />
+    <div class="text-center mt-4">
+      <.button class="!text-base font-bold bg-green-600">Generate short link</.button>
+    </div>
   </.form>
 </div>

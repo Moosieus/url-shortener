@@ -18,7 +18,7 @@ defmodule UrlShortenerWeb.Router do
     pipe_through :browser
 
     live "/", Live.Create, :index
-    live  "/stats", Live.MyLinks, :index
+    live "/stats", Live.MyLinks, :index
     get "/export/:user_id", Export, :index
     get "/:path", Redirect, :index
   end

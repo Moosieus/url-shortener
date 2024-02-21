@@ -22,6 +22,7 @@ defmodule UrlShortener.Shortener.Link do
     |> validate_length(:url, min: 1, max: 2083)
     |> validate_length(:path, min: 1, max: 64)
     |> validate_url(:url)
-    |> unique_constraint(:path) # need to use message here!
+    # need to use message here!
+    |> unique_constraint(:path)
   end
 end

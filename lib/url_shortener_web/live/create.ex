@@ -6,7 +6,6 @@ defmodule UrlShortenerWeb.Live.Create do
   alias UrlShortener.Shortener.Link
 
   def mount(_params, session, socket) do
-
     socket =
       socket
       |> assign(form: to_form(Shortener.change_link(%Link{})))
@@ -39,8 +38,8 @@ defmodule UrlShortenerWeb.Live.Create do
         # update this to show that the link's created at the bottom of the card.
 
         {:noreply, socket}
-      {:error, %Ecto.Changeset{} = changeset} ->
 
+      {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
   end

@@ -10,8 +10,10 @@ defmodule UrlShortener.Shortener.Utils do
         case URI.parse(value) do
           %URI{scheme: nil} ->
             "is missing a scheme (e.g. https)"
+
           %URI{host: nil} ->
             "is missing a host"
+
           %URI{host: host} ->
             if has_tld?(host), do: nil, else: "is missing a top-level domain (e.g. .com or .org)"
         end

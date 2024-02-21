@@ -12,10 +12,7 @@ defmodule UrlShortenerWeb.Live.MyLinks.ToggleActive do
   def render(%{link: %Link{active: true}} = assigns) do
     ~H"""
     <button phx-click="toggle_active" phx-target={@myself}>
-      <.icon
-        name="hero-check"
-        class="cursor-pointer text-green-800 dark:text-green-300"
-      />
+      <.icon name="hero-check" class="cursor-pointer text-green-800 dark:text-green-300" />
     </button>
     """
   end
@@ -23,10 +20,7 @@ defmodule UrlShortenerWeb.Live.MyLinks.ToggleActive do
   def render(%{link: %Link{active: false}} = assigns) do
     ~H"""
     <button phx-click="toggle_active" phx-target={@myself}>
-      <.icon
-        name="hero-archive-box"
-        class="cursor-pointer text-red-800 dark:text-red-300"
-      />
+      <.icon name="hero-archive-box" class="cursor-pointer text-red-800 dark:text-red-300" />
     </button>
     """
   end

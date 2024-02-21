@@ -12,6 +12,7 @@ defmodule UrlShortenerWeb.Endpoint do
   ]
 
   plug RemoteIp
+
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]],
     longpoll: [connect_info: [session: @session_options]]

@@ -27,7 +27,8 @@ defmodule UrlShortenerWeb.Live.MyLinks do
     links =
       case List.keyfind(links, link_id, 0) do
         {_, link, visits} ->
-          List.keyreplace(links, link_id, 0, {link_id, link, visits+1})
+          List.keyreplace(links, link_id, 0, {link_id, link, visits + 1})
+
         nil ->
           links
       end

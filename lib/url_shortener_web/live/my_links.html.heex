@@ -14,11 +14,15 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-500">
-            <tr id={"#{link.id}"} :for={{_link_id, %Link{} = link, total_visits} <- @links} class="divide-x divide-slate-500">
+            <tr
+              :for={{_link_id, %Link{} = link, total_visits} <- @links}
+              id={"#{link.id}"}
+              class="divide-x divide-slate-500"
+            >
               <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis">
-              <a class="underline" href={"/#{link.path}"} target="_blank">
-                <%= link.path %>
-              </a>
+                <a class="underline" href={"/#{link.path}"} target="_blank">
+                  <%= link.path %>
+                </a>
               </td>
               <td class="px-3 py-4 overflow-hidden whitespace-nowrap overflow-ellipsis max-w-0">
                 <a class="underline" href={link.url} target="_blank">
@@ -41,7 +45,7 @@
               </td>
             </tr>
           </tbody>
-        </table> 
+        </table>
       </div>
       <div>
         <a class="underline italic" href={~p"/export/#{@user_id}"} target="_blank">
@@ -52,7 +56,9 @@
   <% else %>
     <div class="w-full text-center">
       <h3 class="text-2xl font-bold italic">You haven't created any links yet!</h3>
-      <div>Create some links on the <.link class="underline" navigate={~p"/"}>shortener page</.link>, and their stats will show up here.</div>
+      <div>
+        Create some links on the <.link class="underline" navigate={~p"/"}>shortener page</.link>, and their stats will show up here.
+      </div>
     </div>
   <% end %>
 </div>

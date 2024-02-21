@@ -35,7 +35,12 @@ defmodule UrlShortener.ShortenerTest do
 
     test "update_link/2 with valid data updates the link" do
       link = link_fixture()
-      update_attrs = %{path: "some updated path", url: "some updated url", creator: "some updated creator"}
+
+      update_attrs = %{
+        path: "some updated path",
+        url: "some updated url",
+        creator: "some updated creator"
+      }
 
       assert {:ok, %Link{} = link} = Shortener.update_link(link, update_attrs)
       assert link.path == "some updated path"
@@ -79,7 +84,11 @@ defmodule UrlShortener.ShortenerTest do
     end
 
     test "log_visit/1 with valid data creates a visit" do
-      valid_attrs = %{timestamp: ~U[2024-02-17 06:33:00Z], ip_address: "some ip_address", req_headers: %{}}
+      valid_attrs = %{
+        timestamp: ~U[2024-02-17 06:33:00Z],
+        ip_address: "some ip_address",
+        req_headers: %{}
+      }
 
       assert {:ok, %Visit{} = visit} = Shortener.log_visit(valid_attrs)
       assert visit.timestamp == ~U[2024-02-17 06:33:00Z]
@@ -93,7 +102,12 @@ defmodule UrlShortener.ShortenerTest do
 
     test "update_visit/2 with valid data updates the visit" do
       visit = visit_fixture()
-      update_attrs = %{timestamp: ~U[2024-02-18 06:33:00Z], ip_address: "some updated ip_address", req_headers: %{}}
+
+      update_attrs = %{
+        timestamp: ~U[2024-02-18 06:33:00Z],
+        ip_address: "some updated ip_address",
+        req_headers: %{}
+      }
 
       assert {:ok, %Visit{} = visit} = Shortener.update_visit(visit, update_attrs)
       assert visit.timestamp == ~U[2024-02-18 06:33:00Z]
