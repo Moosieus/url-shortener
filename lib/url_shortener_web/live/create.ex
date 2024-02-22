@@ -8,9 +8,12 @@ defmodule UrlShortenerWeb.Live.Create do
   alias UrlShortener.Shortener
   alias UrlShortener.Shortener.Link
 
+  embed_templates "create/*"
+
   def mount(_params, session, socket) do
     socket =
       socket
+      |> render_with(&input_form/1)
       |> assign(form: to_form(Shortener.change_link(%Link{})))
       |> assign(user_id: session["_csrf_token"])
 
@@ -34,13 +37,25 @@ defmodule UrlShortenerWeb.Live.Create do
 
     case Shortener.create_link(link_params) do
       {:ok, link} ->
-        socket = put_flash(socket, :info, "link created: #{link.path}")
-        # update this to show that the link's created at the bottom of the card.
+        socket =
+          socket
+          |> render_with(&copy/1)
+          |> assign(:link, link)
 
         {:noreply, socket}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def handle_event("shorten_another", _params, socket) do
+    socket =
+      socket
+      |> render_with(&input_form/1)
+      |> assign(link: nil)
+      |> assign(form: to_form(Shortener.change_link(%Link{})))
+
+    {:noreply, socket}
   end
 end

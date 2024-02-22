@@ -14,7 +14,10 @@
     <h1 class="text-lg font-bold mt-4">Enter a vanity link (optional):</h1>
     <.short_input phx-debounce="300" field={@form[:path]} />
     <div class="text-center mt-4">
-      <.button class="!text-base font-bold bg-green-600">Generate short link</.button>
+      <.button class="!text-base font-bold bg-green-600">
+        <.icon name="hero-link" class="cursor-pointer text-white" />
+        <span class="ml-1 align-bottom">Generate short link</span>
+      </.button>
     </div>
   </.form>
 </div>
