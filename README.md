@@ -15,22 +15,3 @@ You have 3 options for setting up TimescaleDB:
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-## Dev setup extra steps (Ubuntu on WSL)
-`mix ecto.create` ain't working OOTB for me. Did this instead:
-```sh
-sudo -i -u postgres
-createuser --createdb --pwprompt --no-createrole --no-superuser url_shortener
-```
-Enter `password` as the password (***dev only!***)
-```sh
-exit
-```
-Finally
-```sh
-mix ecto.create
-```
-To enable live reloading, install `inotify-tools`:
-```sh
-sudo apt install inotify-tools
-```
