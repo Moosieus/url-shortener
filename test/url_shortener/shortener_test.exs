@@ -16,7 +16,11 @@ defmodule UrlShortener.ShortenerTest do
     end
 
     test "create_link/1 with valid data creates a link" do
-      valid_attrs = %{path: "shazbot", url: "https://www.tribes3rivals.com/", creator: "12345hjkl"}
+      valid_attrs = %{
+        path: "shazbot",
+        url: "https://www.tribes3rivals.com/",
+        creator: "12345hjkl"
+      }
 
       assert {:ok, %Link{} = link} = Shortener.create_link(valid_attrs)
       assert link.path == "shazbot"
