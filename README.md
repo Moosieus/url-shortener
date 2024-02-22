@@ -4,7 +4,7 @@
 1. Install Postgres *with* TimescaleDB
 
 You have 3 options for setting up TimescaleDB:
-  1. Uninstall any versions of Postgres you may have and host Timescaledb from a pre-built Docker container.
+  1. **Uninstall any versions of Postgres you may have** and host Timescaledb from a pre-built Docker container.
   2. Compile TimescaleDB from source and install it on your local Postgres database.
   3. Install TimescaleDB from PPA and install it on your local Postgres database.
 
