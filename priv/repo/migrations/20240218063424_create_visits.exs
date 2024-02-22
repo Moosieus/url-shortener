@@ -13,7 +13,7 @@ defmodule UrlShortener.Repo.Migrations.CreateVisits do
 
     create index(:visits, [:link_id, :timestamp])
 
-    execute("SELECT create_hypertable('visits', by_range('timestamp'))")
+    execute("SELECT create_hypertable('visits', 'timestamp')")
   end
 
   def down do

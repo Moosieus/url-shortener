@@ -35,3 +35,4 @@ url_shortener-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.fly-db-credentials
