@@ -9,7 +9,18 @@ defmodule UrlShortenerWeb.Export do
 
   @csv_headers [["path", "source_link", "visits", "date_created", "active"]]
 
-  def index(conn, %{"user_id" => user_id}) do
+  def index(conn, _params) do
+    case Plug.Conn.get_session(conn, "_csrf_token") do
+      user_id when is_binary(user_id) ->
+        send_csv(conn, user_id)
+
+      nil ->
+        send_resp(conn, 403, "Unauthorized")
+    end
+  end
+
+  @doc false
+  def send_csv(conn, user_id) do
     csv =
       link_data(user_id)
       |> NimbleCSV.RFC4180.dump_to_iodata()

@@ -1,21 +1,23 @@
 defmodule UrlShortenerWeb.ExportTest do
   use UrlShortenerWeb.ConnCase
 
-  describe "GET /export/:user_id" do
-    # setup [:seed]
+  alias UrlShortenerWeb.Export
 
-    test "returns a valid csv spreadsheet", %{conn: conn} do
-      conn = get(conn, ~p"/export/:user_id")
+  describe "GET /export" do
+    import UrlShortener.ShortenerFixtures
 
-      bin_resp = text_response(conn, 200)
+    # can't test properly due to the CSRF plug not being available during test.
+    # this should suffice instead.
+    test "Export.send_csv/2 returns a valid csv spreadsheet", %{conn: conn} do
+      _link = link_fixture()
 
-      csv = NimbleCSV.RFC4180.parse_string(bin_resp)
+      conn = Export.send_csv(conn, csrf_token())
+
+      text = response(conn, 200)
+
+      csv = NimbleCSV.RFC4180.parse_string(text)
 
       assert match?([[_ | _] | _], csv)
     end
   end
-
-  # defp seed(context) do
-  #   IO.inspect(context, label: "context")
-  # end
 end
