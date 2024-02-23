@@ -24,13 +24,23 @@ defmodule UrlShortener.Shortener.Visit do
     |> reject_sensitive_headers()
   end
 
-  @sensitive_headers ["cookie"]
-
-  defp reject_sensitive_headers(changeset) do
-    headers = get_field(changeset, :req_headers)
-
-    put_change(changeset, :req_headers, Map.reject(headers, &header_is_sensitive/1))
+  def sensitive_headers() do
+    ["cookie"]
   end
 
-  defp header_is_sensitive({k, _}), do: k in @sensitive_headers
+  defp reject_sensitive_headers(changeset) do
+    case get_field(changeset, :req_headers) do
+      %{} = req_headers ->
+        put_change(
+          changeset,
+          :req_headers,
+          Map.reject(req_headers, &header_is_sensitive/1)
+        )
+
+      nil ->
+        changeset
+    end
+  end
+
+  defp header_is_sensitive({k, _}), do: k in sensitive_headers()
 end

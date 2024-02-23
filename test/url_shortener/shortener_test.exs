@@ -11,21 +11,24 @@ defmodule UrlShortener.ShortenerTest do
     @invalid_attrs %{path: nil, url: nil, creator: nil}
 
     test "list_user_links/1 returns all links for user" do
-      link = link_fixture()
-      assert Shortener.list_user_links() == [link]
+      %Link{} = link_fixture = link_fixture()
+
+      [{_id, link, _visits}] = Shortener.list_user_links(csrf_token())
+
+      assert link == link_fixture
     end
 
     test "create_link/1 with valid data creates a link" do
       valid_attrs = %{
         path: "shazbot",
         url: "https://www.tribes3rivals.com/",
-        creator: "12345hjkl"
+        creator: csrf_token()
       }
 
       assert {:ok, %Link{} = link} = Shortener.create_link(valid_attrs)
       assert link.path == "shazbot"
       assert link.url == "https://www.tribes3rivals.com/"
-      assert link.creator == "12345hjkl"
+      assert link.creator == csrf_token()
       assert link.active == true
     end
 
@@ -47,20 +50,41 @@ defmodule UrlShortener.ShortenerTest do
     @invalid_attrs %{timestamp: nil, ip_address: nil, req_headers: nil}
 
     test "log_visit/1 with valid data creates a visit" do
+      link = link_fixture()
+
       valid_attrs = %{
         timestamp: ~U[2024-02-17 06:33:00Z],
         ip_address: {127, 0, 0, 1},
-        req_headers: %{}
+        req_headers: req_headers(),
+        link_id: link.id
       }
 
       assert {:ok, %Visit{} = visit} = Shortener.log_visit(valid_attrs)
       assert visit.timestamp == ~U[2024-02-17 06:33:00Z]
-      assert visit.ip_address == "some ip_address"
-      assert visit.req_headers == %{}
+      assert visit.ip_address == %Postgrex.INET{address: {127, 0, 0, 1}, netmask: 32}
+      assert 0 < Enum.count(visit.req_headers)
+      assert visit.link_id == link.id
     end
 
     test "log_visit/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Shortener.log_visit(@invalid_attrs)
+    end
+
+    test "log_visit/1 does not save sensitive headers" do
+      link = link_fixture()
+
+      valid_attrs = %{
+        timestamp: ~U[2024-02-17 06:33:00Z],
+        ip_address: {127, 0, 0, 1},
+        req_headers: req_headers(),
+        link_id: link.id
+      }
+
+      assert {:ok, %Visit{} = visit} = Shortener.log_visit(valid_attrs)
+
+      for header <- Visit.sensitive_headers() do
+        assert Map.has_key?(visit.req_headers, header) === false
+      end
     end
   end
 end

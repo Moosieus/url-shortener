@@ -46,10 +46,6 @@
   - Sometimes links may not be queryable anyway (ex: steam://connect/<ip_address> links).
   - I've done lots of client libraries already (see elixir-a2s and kevo_ex).
 
-- The creation UI is lacking:
-  - Central card should expand and have a "copy me" functionality.
-  - UI should cycle back to a create-another state.
-
 - Not all tests passing:
   - Will get around to it time permitting.
 
