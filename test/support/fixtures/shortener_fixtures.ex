@@ -7,10 +7,12 @@ defmodule UrlShortener.ShortenerFixtures do
   def req_headers() do
     %{
       "host" => "localhost:4000",
-      "accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "accept" =>
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
       "referer" => "http://localhost:4000/stats",
       "connection" => "keep-alive",
-      "user-agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
+      "user-agent" =>
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
       "sec-fetch-dest" => "document",
       "sec-fetch-mode" => "navigate",
       "sec-fetch-site" => "same-origin",
