@@ -46,7 +46,7 @@
   - Sometimes links may not be queryable anyway (ex: steam://connect/<ip_address> links).
   - I've done lots of client libraries already (see elixir-a2s and kevo_ex).
 
-- Not all tests passing:
+- Could use more test coverage:
   - Will get around to it time permitting.
 
 - Theme toggle breaks on navigation:
